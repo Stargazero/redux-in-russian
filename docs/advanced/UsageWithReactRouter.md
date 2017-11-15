@@ -116,6 +116,24 @@ Root.propTypes = {
 export default Root;
 ```
 
+Нам также понадобится рефакторинг `index.js` для рендеринга компонента `<Root />` в DOM.
+
+#### `index.js`
+``` js
+import React from 'react'
+import { render } from 'react-dom'
+import { createStore } from 'redux'
+import todoApp from './reducers'
+import Root from './components/Root'
+
+let store = createStore(todoApp)
+
+render(
+  <Root store={store} />,
+  document.getElementById('root')
+)
+```
+
 ## Навигация при помощи React Router
 
 React Router поставляется с компонентом [`<Link />`](https://github.com/reactjs/react-router/blob/master/docs/API.md#link), который позволяет перемещаться по приложению. Мы можем использовать его в нашем компоненте-контейнере `<FilterLink />`, таким образом, мы сможем изменять URL при помощи `<FilterLink />`. Параметр `activeStyle={}` позволяет применить стиль активного состояния.
